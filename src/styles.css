@@ -1,1 +1,95 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 200;
+  }
+  
+  html, body {
+    
+
+    
+  
+    margin: 0px;
+    color: #3e4144;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  
+  dd {
+    font-weight: bold;
+  }
+  
+  button {
+    background-color: black;
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 5px 10px;
+  }
+  
+  button:hover {
+    background-color: #3e4144;
+  }
+  
+  button:focus{ 
+    outline: none;
+  }
+  
+  .p-1 {
+    padding: 1px;
+  }
+
+  #side_nav {
+      background: #000;
+      min-width: 250px;
+      max-width: 250px;
+      transition: all 0.2s;
+  }
+
+  .content{
+    min-height: 100vh;
+    width: 100%;
+  }
+
+  hr.h-color{
+background: #eee;
+
+  }
+
+  .sidebar li.active{
+    background: #eee;
+    border-radius: 8px;
+  }
+
+  .sidebar li.active a , .sidebar li.active a:hover{
+    color: #000;
+  }
+
+  .sidebar li a{
+    color: #fff;
+  }
+
+  @media(max-width:767px){
+    #side_nav{
+      margin-left: -250px;
+      position: fixed;
+      min-height: 100vh;
+      z-index: 1;
+    }
+
+    #side_nav.active{
+      margin-left: 0px;
+    
+    }
+
+  }
+
+
+  .modal-backdrop + .modal-backdrop {
+    z-index: 1040;
+  }
+  .modal + .modal {
+    z-index: 1050;
+  }

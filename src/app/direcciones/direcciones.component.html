@@ -1,0 +1,184 @@
+
+<div class="row mt-4">
+	<div class="row px-5">
+		<div class="div col-8">
+				<h2 class="h2">Direcciones</h2>
+		</div>
+		<div class="div col-4">
+			<button class="btn btn-outline-primary" (click)="open(0,content)" style="background-color: #7458a5;color: white;border-color: #7458a5;">Agregar direccion</button>
+		</div>
+	</div>
+	
+	
+</div>
+
+<div class="row m-3 border" style="border-color: #7458a5!important;border-radius: 5px;">
+	
+	<div class="row p-5">
+		<div class="col-8">
+			<div class="form-group">
+				<input #buscar (keyup)="onSearchDireccion(buscar.value)"  style="border-color: #7458a5!important;border-radius: 5px;"
+				formControlName="aliasDireccion" placeholder="Buscar por nombre o direccion" type="text" class="form-control">
+				
+			  </div>
+		</div>
+		
+		<div class="col-4">
+			<div class="form-group">
+			<button type="button" class="btn btn-outline-dark" style="border-color: #7458a5!important;border-radius: 5px;" (click)="exportCSV()">Exportar</button>
+		</div>
+		</div>
+	</div>
+
+	<table class="table table-striped m-1">
+		<thead>
+			<tr>
+				<th scope="col">Alias</th>
+				<th scope="col">Calle y numero</th>
+				<th scope="col">Colonia</th>
+				<th scope="col">Ciudad</th>
+				<th scope="col">Estado</th>
+				<th scope="col">Pais</th>
+				<th scope="col">Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of direcciones| filtro:page:search">
+				
+				<td>{{ item.aliasDireccion}}</td>
+				<td>{{ item.calleNumero}}</td>
+				<td>{{ item.colonia}}</td>
+				<td>{{ item.ciudad}}</td>
+				<td>{{ item.estado}}</td>
+				<td>{{ item.pais}}</td>
+				<td>
+					
+				<i class="fa-solid fa-pen-to-square cursor" (click)="open(item.direccionesId,content)" ></i>
+				<i class="fa-regular fa-circle-xmark p-3 cursor" (click)="open(item.direccionesId,alert)" ></i>
+				</td>
+	
+			</tr>
+		</tbody>
+	</table>
+	
+	
+
+</div>
+
+
+
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Agregar dirección</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form class="row" (ngSubmit)="save()" [formGroup]="formulario">
+			
+			<div class="col-6 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Alias de dirección</label>
+					<input formControlName="aliasDireccion" placeholder="Alias de direccion" type="text" class="form-control">
+					<small *ngIf="campoEsValido('aliasDireccion')" class="form-text text-danger">Campo requerido</small>
+				  </div>
+			</div>
+			<div class="col-6 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Nombre de la persona</label>
+					<input formControlName="nombrePersona" placeholder="Nombre de la persona" type="text" class="form-control" >
+					<small *ngIf="campoEsValido('nombrePersona')" class="form-text text-danger">Campo requerido</small>
+				  </div>	
+			</div>
+			<div class="col-6 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Teléfono</label>
+					<input formControlName="telefono" placeholder="Teléfono" type="text" class="form-control" id="exampleInputEmail1">
+					<small *ngIf="campoEsValido('telefono')" class="form-text text-danger">Campo requerido</small>
+				  </div>	
+			</div>
+			<div class="col-6 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Correo electrónico</label>
+					<input formControlName="correo" placeholder="Correo electrónico" type="email" class="form-control" >
+					<small *ngIf="campoEsValido('correo')" class="form-text text-danger">Campo requerido</small>
+				  </div>		
+			</div>
+			<div class="col-3 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">País</label>
+					<input formControlName="pais" placeholder="País" type="text" class="form-control">
+					<small *ngIf="campoEsValido('pais')" class="form-text text-danger">Campo requerido</small>
+				  </div>		
+			</div>
+			<div class="col-3 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Código postal</label>
+					<input formControlName="codigoPostal" placeholder="Código postal" type="text" class="form-control">
+					<small *ngIf="campoEsValido('codigoPostal')" class="form-text text-danger">Campo requerido</small>
+				  </div>			
+			</div>
+			<div class="col-3 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Ciudad</label>
+					<input formControlName="ciudad" placeholder="Ciudad" type="text" class="form-control">
+					<small *ngIf="campoEsValido('ciudad')" class="form-text text-danger">Campo requerido</small>
+				  </div>			
+			</div>
+			<div class="col-3 ">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Estado</label>
+					<input formControlName="estado" placeholder="Estado" type="text" class="form-control">
+					<small *ngIf="campoEsValido('estado')" class="form-text text-danger">Campo requerido</small>
+				  </div>		
+			</div>
+
+			<div class="col-6 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Calle y número</label>
+					<input formControlName="calleNumero" placeholder="Calle y número" type="text" class="form-control">
+					<small *ngIf="campoEsValido('calleNumero')" class="form-text text-danger">Campo requerido</small>
+				  </div>	
+			</div>
+			<div class="col-6 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Colonia</label>
+					<input formControlName="colonia" placeholder="Colonia" type="text" class="form-control">
+					<small *ngIf="campoEsValido('colonia')" class="form-text text-danger">Campo requerido</small>
+				  </div>		
+			</div>
+
+			<div class="col-6 mb-3 p-2">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Referencias</label>
+					<input formControlName="referencia" placeholder="Referencias" type="text" class="form-control" >
+					<small *ngIf="campoEsValido('referencia')" class="form-text text-danger">Campo requerido</small>
+				  </div>			
+			</div>
+
+			<div class="modal-footer" style="display: flex;
+			align-items: center;
+			justify-content: center;
+		">
+				<button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+				<button type="submit" class="btn btn-outline-dark">Guardar</button>
+			
+			</div>
+		</form>
+	</div>
+
+</ng-template>
+
+<ng-template #alert let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Aviso</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>Está usted totalmente seguro de que desea elminar esta fila, no se podra recuperar!!!</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancelar</button>
+		<button type="button" class="btn btn-outline-dark" (click)="delet()">Aceptar</button>
+	</div>
+</ng-template>
