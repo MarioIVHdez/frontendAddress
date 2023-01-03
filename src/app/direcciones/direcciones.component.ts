@@ -62,11 +62,11 @@ export class DireccionesComponent implements OnInit {
       showTitle: true,
       title: 'Direcciones',
       useBom: true,
-      headers: ["aliasDireccion", "nombrePersona", 
+      headers: ["Id","aliasDireccion", "nombrePersona", 
       "telefono","correo",
       "pais","codigoPostal",
       "ciudad","estado",
-      "calleNumero","colonia","referencia"]
+      "calleNumero","colonia","referencia","Fecha Creacion","Fecha edicion", "Fecha eliminacion"]
     };
    
     new ngxCsv(this.direcciones, "CSV", info);

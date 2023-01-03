@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  APIEndpoint: 'https://localhost:44384/api/Direcciones/',
+  APIEndpoint: 'http://ivanmejia-001-site1.btempurl.com/api/Direcciones/',
   production: false
 };
 
